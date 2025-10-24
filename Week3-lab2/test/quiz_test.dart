@@ -11,37 +11,26 @@ main() {
 
   Quiz quiz = new Quiz(questions: [q1, q2], players: []);
 
+
   test('All answers are good (100%)', () {
-    // Create the answer here
-    Answer a1 = Answer(questionID: quiz.questions[0].id ,question: q1, answerChoice: "4");
-    Answer a2 = Answer(questionID: quiz.questions[1].id ,question: q2, answerChoice: "5");
-
-    quiz.answers = [a1, a2];
-
-    // Check something
-    expect(quiz.getScoreInPercentage(), equals(100));
+    Player p1 = Player(name: 'Nita');
+    p1.addAnswer(Answer(questionID: quiz.questions[0].id,question: q1, answerChoice: "4"));
+    p1.addAnswer(Answer(questionID: quiz.questions[1].id,question: q2, answerChoice: "5"));
+    expect(p1.getScoreInPercentage(), equals(100));
   });
 
   test('Your answers are half good (83%)', () {
-    // Create the answer here
-    Answer a1 = Answer(questionID: quiz.questions[0].id ,question: q1, answerChoice: "1");
-    Answer a2 = Answer(questionID: quiz.questions[1].id ,question: q2, answerChoice: "5");
-
-    quiz.answers = [a1, a2];
-
-    // Check something
-    expect(quiz.getScoreInPercentage(), equals(83));
+    Player p1 = Player(name: 'Nita');
+    p1.addAnswer(Answer(questionID: quiz.questions[0].id,question: q1, answerChoice: "1"));
+    p1.addAnswer(Answer(questionID: quiz.questions[1].id,question: q2, answerChoice: "5"));
+    expect(p1.getScoreInPercentage(), equals(83));
   });
 
   test('All answers are bad (0%)', () {
-    // Create the answer here
-    Answer a1 = Answer(questionID: quiz.questions[0].id ,question: q1, answerChoice: "1");
-    Answer a2 = Answer(questionID: quiz.questions[1].id ,question: q2, answerChoice: "1");
-
-    quiz.answers = [a1, a2];
-
-    // Check something
-    expect(quiz.getScoreInPercentage(), equals(0));
+    Player p1 = Player(name: 'Nita');
+    p1.addAnswer(Answer(questionID: quiz.questions[0].id,question: q1, answerChoice: "1"));
+    p1.addAnswer(Answer(questionID: quiz.questions[1].id,question: q2, answerChoice: "1"));
+    expect(p1.getScoreInPercentage(), equals(0));
   });
 
   test('Add new player to quiz.', () {

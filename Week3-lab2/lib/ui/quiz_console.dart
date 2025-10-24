@@ -16,6 +16,9 @@ class QuizConsole {
 
       if (name != null && name.isNotEmpty) {
         print("Player: $name");
+
+        Player player = Player(name: name);
+
         for (var question in quiz.questions) {
           print('Question: ${question.title}');
           print('Choices: ${question.choices}');
@@ -28,7 +31,7 @@ class QuizConsole {
                 questionID: question.id,
                 question: question,
                 answerChoice: userInput);
-            quiz.addAnswer(answer);
+            player.addAnswer(answer);
           } else {
             print('No answer entered. Skipping question.');
           }
@@ -36,9 +39,9 @@ class QuizConsole {
           print('');
         }
 
-        int score = quiz.getScoreInPercentage();
-        int point = quiz.getScoreInPoint();
-        Player player = Player(name: name, score: score);
+        int score = player.getScoreInPercentage();
+        int point = player.getScoreInPoint();
+        player.score = score;
         quiz.addPlayer(player);
         print('--- Quiz Finished ---');
         print('${name}, Your score in percentage: $score %.');
@@ -48,7 +51,7 @@ class QuizConsole {
         for (var player in quiz.players) {
           print('${player.name}: ${player.score} %');
         }
-        quiz.answers.clear();
+        player.answers.clear();
       } else {
         break;
       }

@@ -35,42 +35,12 @@ class Answer {
 
 class Player {
   final String? name;
-  final int? score;
-  final Map<String, String>? answers;
-
-  Player({this.name, this.score = 0, this.answers});
-}
-
-class Quiz {
-  final String id;
-  List<Question> questions;
+  int? score;
   List<Answer> answers = [];
-  List<Player> players = [];
 
-  Quiz({String? id, required this.questions, required this.players})
-      : id = id ?? uuid.v4();
-
-  Question? getQuestionById(String id) {
-    try {
-      return questions.firstWhere((question) => question.id == id);
-    } catch (e) {
-      return null;
-    }
-  }
-
+  Player({this.name, this.score = 0});
   void addAnswer(Answer asnwer) {
     this.answers.add(asnwer);
-  }
-
-  void addPlayer(Player player) {
-    for (int i = 0; i < players.length; i++) {
-      if (players[i].name == player.name) {
-        players.removeAt(i);
-        players.add(player);
-        return;
-      }
-    }
-    this.players.add(player);
   }
 
   int getScoreInPoint() {
@@ -94,4 +64,33 @@ class Quiz {
     }
     return ((pointObtain / totalSCore) * 100).toInt();
   }
+}
+
+class Quiz {
+  final String id;
+  List<Question> questions;
+  List<Player> players = [];
+
+  Quiz({String? id, required this.questions, required this.players})
+      : id = id ?? uuid.v4();
+
+  Question? getQuestionById(String id) {
+    try {
+      return questions.firstWhere((question) => question.id == id);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  void addPlayer(Player player) {
+    for (int i = 0; i < players.length; i++) {
+      if (players[i].name == player.name) {
+        players.removeAt(i);
+        players.add(player);
+        return;
+      }
+    }
+    this.players.add(player);
+  }
+
 }
